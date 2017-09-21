@@ -60,3 +60,5 @@ for e in lista_final:
 
 
 archivo2.close()
+if __name__ == "__main__"
+
