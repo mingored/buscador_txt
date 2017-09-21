@@ -1,0 +1,62 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Sat Nov 26 23:37:55 2016
+
+@author: Domingo
+"""
+
+archivo = open("JUNIO2017.txt","r")#abro el archivo con datos
+archivo2 = open("texto_JUNIO2017.txt","w")#abro el archivo con datos
+lineas = archivo.readlines() #se crea la lista linea
+
+
+pacientes=[]
+
+for linea in lineas:
+    linea =linea.strip() #elimino los espacios externos
+    linea = linea.split("\t")# separo y desempaqueto
+    pacientes.append(linea)  #los agrego a la lista pacientes
+
+
+
+nueva_lista = []
+
+for paciente in pacientes:
+	if paciente != [""]:
+		nueva_lista.append(paciente)  
+
+	
+x = len(nueva_lista)
+
+lista = []
+for n in range(x-1):
+	if len(nueva_lista[n]) == len(nueva_lista[n +1]):
+		lista.append(nueva_lista[n])
+
+
+for fila in lista:
+	for elemento in fila:
+		print(elemento,'',end = '')
+	print()
+
+
+
+for x in lista:
+	try:
+		x [0] = int(x[0])
+	except:
+		lista.remove(x)
+
+lista.sort(key=lambda x: int(x[0]))
+
+lista_final = []
+for i in range(len(lista)-1):
+	if lista[i][0] != lista[i+1][0]:
+		lista_final.append(lista[i])
+
+
+for e in lista_final:
+	archivo2.write('%s \n'%e + "\n")
+
+
+archivo2.close()
